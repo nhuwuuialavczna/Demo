@@ -17,12 +17,15 @@ router.post('/fileupload', function (req, res) {
     form.parse(req, function (err, fields, files) {
         var file = files.file;
         var path = file.path;
-        var newpath = __dirname.substr(0, __dirname.length - 6) + '\\' + file.name;
-        res.send(__dirname+"</br>"+file.size);
-        // fs.rename(path, newpath, function (err) {
-        //     if (err) throw err;
-        //     res.end('Upload Thanh cong!');
-        // });
+        var newpath = __dirname;
+        // res.send(__dirname+"</br>"+file.size);
+        fs.rename(path, newpath, function (err) {
+            if (err) {
+                res.end('Upload ko Thanh cong!');
+                return;
+            }
+            res.end('Upload Thanh cong!');
+        });
 
         res.end();
     });

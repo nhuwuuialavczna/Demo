@@ -16,10 +16,9 @@ router.post('/fileupload', function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
         copyFile(fields.file, __dirname + fields.file, function (error) {
-            if (error) return res.send('Nhu cặc');
-            res.send('Như lồn');
+            if (error) return res.write('Nhu cặc');
+            res.write('Như lồn');
         });
-
         res.end();
     });
 });

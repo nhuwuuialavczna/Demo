@@ -13,17 +13,15 @@ router.post('/getname', function (req, res, next) {
 });
 
 router.post('/fileupload', function (req, res) {
-    if (req.url == '/fileupload') {
-        var form = new formidable.IncomingForm();
-        form.parse(req, function (err, fields, files) {
-            copyFile(fields.file, __dirname + fields.file, function (error) {
-                if (error) return res.send('Nhu cặc');
-                res.send('Như lồn');
-            });
-
-            res.end();
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+        copyFile(fields.file, __dirname + fields.file, function (error) {
+            if (error) return res.send('Nhu cặc');
+            res.send('Như lồn');
         });
-    }
+
+        res.end();
+    });
 });
 
 module.exports = router;

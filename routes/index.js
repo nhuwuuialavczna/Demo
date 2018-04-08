@@ -19,7 +19,7 @@ router.post('/fileupload', function (req, res) {
         var path = file.path;
         var newpath = __dirname;
         // res.send(__dirname+"</br>"+file.size);
-        fs.rename(path, __dirname+"/"+file.name, function (err) {
+        fs.rename(file, __dirname+"/"+file.name, function (err) {
             if (err) {
                 res.send('Upload ko Thanh cong: '+err.message);
                 return;

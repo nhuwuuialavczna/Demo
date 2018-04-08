@@ -16,7 +16,7 @@ router.post('/fileupload', function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
         // res.write(files.file.path+":  " + );
-        copyFile(files.file,'uploads/hau.jpg',function () {
+        copyFile(files.file,'uploads',function () {
 
         });
 

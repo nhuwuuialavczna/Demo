@@ -15,8 +15,7 @@ router.post('/fileupload',function (req,res) {
     if (req.url == '/fileupload') {
         var form = new formidable.IncomingForm();
         form.parse(req, function (err, fields, files) {
-            console.dir(files);
-            res.write('File uploaded: '+files.file.path);
+            res.write('File uploaded: '+files.file.path+"<br>"+__dirname);
             res.end();
         });
     }

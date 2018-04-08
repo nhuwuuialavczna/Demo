@@ -15,8 +15,8 @@ router.post('/getname', function (req, res, next) {
 router.post('/fileupload', function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
-        res.write(files.file.path+":  " + __dirname.substr(0,__dirname.length-6)+'uploads');
-
+        // res.write(files.file.path+":  " + );
+        res.write('<img src="'+__dirname.substr(0,__dirname.length-6)+'uploads/393c4776ca8deb35a2392c2e33e09a0d.jpg'+'"/>');
         res.end();
     });
 });

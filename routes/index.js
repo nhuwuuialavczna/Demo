@@ -16,9 +16,37 @@ router.post('/fileupload', function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
         // res.write(files.file.path+":  " + );
-        res.send('<img src="uploads/393c4776ca8deb35a2392c2e33e09a0d.jpg"/>');
+        copyFile(files.file,'uploads/hau.jpg',function () {
+
+        });
+
+        // res.send('<img src="uploads/393c4776ca8deb35a2392c2e33e09a0d.jpg"/>');
         res.end();
     });
 });
+
+function copyFile(source, target, cb) {
+    var cbCalled = false;
+
+    var rd = fs.createReadStream(source);
+    rd.on("error", function(err) {
+        done(err);
+    });
+    var wr = fs.createWriteStream(target);
+    wr.on("error", function(err) {
+        done(err);
+    });
+    wr.on("close", function(ex) {
+        done();
+    });
+    rd.pipe(wr);
+
+    function done(err) {
+        if (!cbCalled) {
+            cb(err);
+            cbCalled = true;
+        }
+    }
+}
 
 module.exports = router;

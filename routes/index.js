@@ -15,7 +15,15 @@ router.post('/getname', function (req, res, next) {
 router.post('/fileupload', function (req, res) {
     var form = new formidable.IncomingForm();
     form.parse(req, function (err, fields, files) {
-        res.send('<img src="uploads/393c4776ca8deb35a2392c2e33e09a0d.jpg"/><br>'+files.file.name);
+        var file = files.file;
+        var path = file.path;
+        var newpath = __dirname.substr(0,__dirname.length-6)+'\\'+file.name;
+
+        fs.rename(path, newpath, function (err) {
+            if (err) throw err;
+            res.end('Upload Thanh cong!');
+        });
+
         res.end();
     });
 });
@@ -24,14 +32,14 @@ function copyFile(source, target, cb) {
     var cbCalled = false;
 
     var rd = fs.createReadStream(source);
-    rd.on("error", function(err) {
+    rd.on("error", function (err) {
         done(err);
     });
     var wr = fs.createWriteStream(target);
-    wr.on("error", function(err) {
+    wr.on("error", function (err) {
         done(err);
     });
-    wr.on("close", function(ex) {
+    wr.on("close", function (ex) {
         done();
     });
     rd.pipe(wr);

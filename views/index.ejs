@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-  <form action="/fileupload" method="post" enctype="multipart/form-data">
-    <input type="file" name="file">
-    <input type="submit" value="Đánh">
-  </form>
-  hau
-  </body>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#upload').on('click', function () {
+                var file_data = $('#sortpicture').prop('files')[0];
+                var form_data = new FormData();
+                form_data.append('file', file_data);
+                alert(form_data);
+                $.ajax({
+                    url: 'https://okdemoa.azurewebsites.net/fileupload',
+                    dataType: 'text',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    type: 'post',
+                    success: function (php_script_response) {
+                        alert(php_script_response);
+                    }
+                });
+            });
+        });
+
+    </script>
+</head>
+<body>
+<input type="file" name="file" id="sortpicture">
+<button id="upload" value="">Đánh</button>
+Upload thử
+
+
+<form>
+
+
+</form>
+</body>
 </html>
